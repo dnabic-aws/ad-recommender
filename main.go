@@ -54,8 +54,16 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/find", ad.Find).Methods("GET")
+	r.HandleFunc("/", ad.Health).Methods("GET")
 	fmt.Println("Starting up on 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
+}
+
+func (a *Advertiser) Health(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	fmt.Fprintln(w, "{}")
 }
 
 func (a *Advertiser) Find(w http.ResponseWriter, req *http.Request) {

@@ -55,8 +55,8 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/find", ad.Find).Methods("GET")
 	r.HandleFunc("/", ad.Health).Methods("GET")
-	fmt.Println("Starting up on 8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	fmt.Println("Starting up listener on port 80")
+	log.Fatal(http.ListenAndServe(":80", r))
 }
 
 func (a *Advertiser) Health(w http.ResponseWriter, req *http.Request) {
